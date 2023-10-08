@@ -1,0 +1,64 @@
+.misson{
+  position:sticky;
+  top: 12%;
+  left: 45%;
+  color: #374259;
+  text-align: center;
+  padding-left: 250px auto;
+  padding-top: 1rem;
+  
+}
+.anilp{
+  position:absolute;
+  top: 180px;
+  left: -1rem;
+  width: 400px;
+  border: 1rem;
+  border-radius: 8rem;
+  float: left;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin: 0 15px 0 0;
+
+}
+
+.rectangle{
+  height: 900px;
+  width: 40%;
+  position: fixed;
+  right: 30px;
+}
+.misson-text{
+
+  position: sticky;
+  top: 200px;
+  font-size: 20px;
+  width: auto;
+  text-align: inherit;
+  font-family: sans-serif;
+  color: #374259;
+  background-blend-mode: color;
+  margin: 0 0 0 15px;
+}
+
+
+
+Link{
+  font-size: "large";
+
+}
+.message-div{
+  position: fixed;
+  top: 700px;
+  left: 1rem;
+  color: #374259;
+
+}
+.msg-{
+  position: fixed;
+  top: 900px;
+  
+}
+.message{
+  color: #374259;
+}

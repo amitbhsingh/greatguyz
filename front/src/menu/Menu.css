@@ -1,0 +1,97 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F2D8D8;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100% auto; /* Make the container take up the entire page height */
+}
+.box {
+  flex: 1 0 calc(33.33% - 20px); /* Adjust the width of each box (33.33% for 3 boxes per row) */
+  margin: 11px;
+  border: 2px solid #374259;;
+  padding: 10px;
+  text-align: center;
+  border-radius: 14px;
+  min-width: 500px auto;
+  min-height: 500px;
+  background-color: #374259;
+  color: #F2D8D8;
+}
+
+.burger-img {
+  position:sticky;
+  width: 82%;
+  max-height: 100%; /* Adjust the maximum height of the image */
+  object-fit: cover;
+}
+
+.burger-des{
+  font-size:25px;
+  padding-top: 30px;
+  color: #F2D8D8;
+}
+.cart1{
+  padding: 10px 18px;
+  background-color: #F2D8D8;
+  color: #374259;
+  border: none;
+  border-radius: 9px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+}
+
+.cart1:hover{
+  background-color: #2c3550;;
+  color: #F2D8D8;
+}
+select{
+  height: 40px;
+  width: 80px;
+  background-color: #F2D8D8;
+  border-radius: .3rem;
+}
+.selection{
+  margin-bottom: 8px;
+  font-size: small;
+  font-weight: bold;
+  
+  
+}
+.selection:hover{
+  color: #F2D8D8;
+  background-color: #374259;
+  
+}
+.incdec{
+  border-radius: 2rem;
+  border-color: #F2D8D8;
+  
+  color: #374259;
+  font-size: large;
+  font-weight: bold;
+}
+.incdec:hover{
+  color: #F2D8D8;
+  background-color: #374259;
+
+}
+.numberofburgers{
+  position: relative;
+  left: 10px;
+  color: #F2D8D8;
+  font-size: large;
+  font-weight: bold;
+  
+}
