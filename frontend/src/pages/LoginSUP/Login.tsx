@@ -9,6 +9,11 @@ import LoginIcon from '@mui/icons-material/Login';
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const handleGoogleLogin = () => {
+    // Redirect to the backend Google authentication route
+    window.location.href = "http://localhost:3000/auth/google";
+};
+
 
   const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -45,8 +50,8 @@ const Login: React.FC = () => {
           <label className='emailLogin' >Password </label>
           <input className='emailin' placeholder='Password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button className='login-button' type="submit">  Login <LoginIcon /></button>
-        <button className='login-button' type="submit"><GoogleIcon /> Join Us With Google</button>
+        <button className='login-button' type="submit" >  Login <LoginIcon /></button>
+        <button className='login-button' type="submit" onClick={handleGoogleLogin} ><GoogleIcon /> Join Us With Google</button>
         <button className='login-button' type="submit"> <FacebookIcon /> Join Us With Facebook </button>
         
       </form>
