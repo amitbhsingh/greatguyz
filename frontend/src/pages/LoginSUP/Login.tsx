@@ -1,21 +1,34 @@
-// src/Login.tsx
+import axios from 'axios'
 import './login.css'
 import React, { useState } from 'react';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import LoginIcon from '@mui/icons-material/Login';
-interface LoginProps {
-  onLogin: (email: string, password: string) => void;
-}
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+
+const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onLogin(email, password);
+      e.preventDefault();
+
+      // Send a POST request to your backend for login
+      axios.post('http://localhost:3000/users/login', {
+          email: email,
+          password: password
+      })
+      .then(response => {
+          console.log(response.data);
+          // Handle successful login here, e.g., store JWT, redirect, etc.
+      })
+      .catch(error => {
+          console.error('Login error', error);
+          // Handle the error, e.g., show a message to the user.
+      });
   };
+
+
 
   
 
