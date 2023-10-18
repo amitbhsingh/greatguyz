@@ -1,24 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
 
-// Define the User schema
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,  // remove any whitespace
-        minlength: 3 // minimal length for the username
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: 6 // minimal length for the password
-    }
-}, {
-    timestamps: true,  // create timestamps for each user (createdAt, updatedAt)
+interface IUser extends Document {
+  username: string;
+  password: string;
+  email?: string;
+  googleId?: string;
+  displayName?: string;
+}
+
+const userSchema = new mongoose.Schema<IUser>({
+  // ... your schema definition as is
 });
 
-// Create and export the User model
-const User = mongoose.model('User', userSchema);
+const User: Model<IUser> = mongoose.model<IUser>('User', userSchema);
 export default User;

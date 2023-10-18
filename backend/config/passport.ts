@@ -1,40 +1,61 @@
-import User from '../models/user'
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import passport from 'passport';
-import { Strategy as LocalStrategy, IVerifyOptions } from 'passport-local';
-import { Document } from 'mongoose';
-import dotenv from 'dotenv';
-
+import mongoose from 'mongoose';
+import router from '../routes/user';
+import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcrypt';
+import User from '../models/user'; // Adjust path as per your project structure
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import dotenv, { config } from 'dotenv'
 dotenv.config();
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/google/callback'
-  },
-  async (accessToken, refreshToken, profile, done) => {
+
+
+
+
+passport.use(new LocalStrategy({
+    usernameField: 'email',  // The name of the email input field
+    passwordField: 'password'  // The name of the password input field
+}, async (email, password, done) => {
     try {
-      // Try to find an existing user with the Google ID
-      const existingUser = await User.findOne({ googleId: profile.id });
+        // Look up the user by email
+        const user = await User.findOne({ email: email }).exec();
 
-      if (existingUser) {
-        // User exists, pass the user to the done callback
-        done(null, existingUser);
-      } else {
-        // User doesn't exist, create a new user
-        const newUser = await new User({
-          googleId: profile.id,
-          // other fields like name, email can also be saved depending on your User schema
-          // example: name: profile.displayName, email: profile.emails[0].value, etc.
-        }).save();
-        done(null, newUser);
-      }
-    } catch (error) {
-    //   done(error, null);
+        if (!user) {
+            return done(null, false, { message: 'Incorrect email.' });
+        }
+
+        // Check if hashed password matches the one in the database
+        const isMatch = await bcrypt.compare(password, user.password);
+        
+        if (!isMatch) {
+            return done(null, false, { message: 'Incorrect password.' });
+        }
+
+        // Successful authentication, return user
+        return done(null, user);
+    } catch (err) {
+        return done(err);
     }
-  }
-));
-// Your routes here
+}));
+
+router.get('/oauth2/redirect/google', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+  }));
+
+  
+
+
+// passport.use(new GoogleStrategy({
+//   clientID: 'process.env.GOOGLE_CLIENT_ID',
+//   clientSecret: 'process.env.GOOGLE_CLIENT_SECRET',
+//   callbackURL: 'http://localhost:3000/auth/google/callback'
+// }, (accessToken, refreshToken, profile, done) => {
+//   // For now, return the user profile. Later, you can link this with a database.
+//   return done(null, profile);
+// }));
+
+// // Tell the clubhouse how to remember and recognize our friends:
+// passport.serializeUser((user, done) => done(null, user));
+// passport.deserializeUser((user, done) => done(null, user));

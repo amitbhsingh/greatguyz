@@ -29,7 +29,6 @@ const Login: React.FC = () => {
       })
       .catch(error => {
           console.error('Login error', error);
-          // Handle the error, e.g., show a message to the user.
       });
   };
 
@@ -51,8 +50,9 @@ const Login: React.FC = () => {
           <input className='emailin' placeholder='Password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <button className='login-button' type="submit" >  Login <LoginIcon /></button>
-        <button className='login-button' type="submit" onClick={handleGoogleLogin} ><GoogleIcon /> Join Us With Google</button>
-        <button className='login-button' type="submit"> <FacebookIcon /> Join Us With Facebook </button>
+        <a className="btn-google" href="/login/federated/google"><GoogleIcon /> Sign in with Google</a>
+        {/* <button className='login-button' type="button" onClick={handleGoogleLogin} > Join Us With Google</button> */}
+        <button className='login-button' type="button"> <FacebookIcon /> Join Us With Facebook </button>
         
       </form>
     </div>

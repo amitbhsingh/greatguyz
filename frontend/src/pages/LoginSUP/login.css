@@ -77,3 +77,19 @@
   font-size: larger;
   font-weight: bold;
 }
+.btn-google{
+  background-color: #F2D8D8;
+  color: #374259;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 9px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  text-decoration: none;
+}
+.btn-google:hover{
+  background-color: #2c3550;
+  color: #F2D8D8;
+}
