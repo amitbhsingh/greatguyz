@@ -1,6 +1,14 @@
+import GoogleStrategy from 'passport-google-oidc'
 import passport from 'passport';
-import router from './user';
-router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
+import express from 'express'
+import db from '../config/database'
+
+const router =express.Router();
+
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
+router.get('/login/federated/google', passport.authenticate('google'));
+
+module.exports = router;

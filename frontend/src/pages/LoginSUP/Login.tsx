@@ -11,7 +11,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const handleGoogleLogin = () => {
     // Redirect to the backend Google authentication route
-    window.location.href = "http://localhost:3000/auth/google";
+    window.location.href = "http://localhost:5173/#/login"
 };
 
 
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
           <input className='emailin' placeholder='Password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <button className='login-button' type="submit" >  Login <LoginIcon /></button>
-        <a className="btn-google" href="/login/federated/google"><GoogleIcon /> Sign in with Google</a>
+        <a className="btn-google" href="http://localhost:3000/auth/google"><GoogleIcon />Login with Google</a>
         {/* <button className='login-button' type="button" onClick={handleGoogleLogin} > Join Us With Google</button> */}
         <button className='login-button' type="button"> <FacebookIcon /> Join Us With Facebook </button>
         
