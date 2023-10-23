@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   },
   displayName: {
     type: String,
-    required: true
+    required: true,
+    unique: false
   },
   firstName: {
     type: String,
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    required: true
+    required: false
   },
   email: {
     type: String,

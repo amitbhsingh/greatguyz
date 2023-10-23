@@ -1,64 +1,65 @@
-import express from 'express';
-import User from '../models/user'; // adjust the path as needed
-import bcrypt from 'bcryptjs';
-import mongoose from 'mongoose';
-const router = express.Router();
+// import express from 'express';
+// import User from '../models/user'; // adjust the path as needed
+// import bcrypt from 'bcryptjs';
+// import mongoose from 'mongoose';
+// const router = express.Router();
 
 
-const userSchema= new mongoose.Schema({
-    googleId: String,
-    email: String,
-    firstName: String,
-    picture: String
-})
-module.exports=mongoose.model('User',userSchema);
-// // User Registration Route
-// router.post('/register', async (req, res) => {
-//     const { username, password } = req.body;
 
-//     // Check if user already exists
-//     const existingUser = await User.findOne({ username });
-//     if (existingUser) {
-//         return res.status(400).send('User already exists');
-//     }
+// const userSchema= new mongoose.Schema({
+//     googleId: String,
+//     email: String,
+//     firstName: String,
+//     picture: String
+// })
+// module.exports=mongoose.model('User',userSchema);
+// // // User Registration Route
+// // router.post('/register', async (req, res) => {
+// //     const { username, password } = req.body;
 
-//     // Hash the password
-//     const hashedPassword = await bcrypt.hash(password, 12);
+// //     // Check if user already exists
+// //     const existingUser = await User.findOne({ username });
+// //     if (existingUser) {
+// //         return res.status(400).send('User already exists');
+// //     }
 
-//     // Create a new user
-//     const user = new User({
-//         username,
-//         password: hashedPassword
-//     });
+// //     // Hash the password
+// //     const hashedPassword = await bcrypt.hash(password, 12);
 
-//     // Save the user to the database
-//     await user.save();
+// //     // Create a new user
+// //     const user = new User({
+// //         username,
+// //         password: hashedPassword
+// //     });
 
-//     // Send a response
-//     res.status(201).send('User registered successfully');
-// });
+// //     // Save the user to the database
+// //     await user.save();
 
-// // User Login Route
-// router.post('/login', async (req, res) => {
-//     const { username, password } = req.body;
+// //     // Send a response
+// //     res.status(201).send('User registered successfully');
+// // });
 
-//     // Find the user by username
-//     const user = await User.findOne({ username });
-//     if (!user) {
-//         return res.status(400).send('Invalid username or password');
-//     }
+// // // User Login Route
+// // router.post('/login', async (req, res) => {
+// //     const { username, password } = req.body;
 
-//     // Check if the password matches
-//     const validPassword = await bcrypt.compare(password, user.password);
-//     if (!validPassword) {
-//         return res.status(400).send('Invalid username or password');
-//     }
+// //     // Find the user by username
+// //     const user = await User.findOne({ username });
+// //     if (!user) {
+// //         return res.status(400).send('Invalid username or password');
+// //     }
 
-//     // TODO: Generate a token or set up a session for the logged-in user
+// //     // Check if the password matches
+// //     const validPassword = await bcrypt.compare(password, user.password);
+// //     if (!validPassword) {
+// //         return res.status(400).send('Invalid username or password');
+// //     }
 
-//     // Send a success response
-//     res.send('Logged in successfully');
-// });
+// //     // TODO: Generate a token or set up a session for the logged-in user
 
-// // Export the router to use in your main server file
-// export default router;
+// //     // Send a success response
+// //     res.send('Logged in successfully');
+// // });
+
+// // // Export the router to use in your main server file
+// // export default router;
