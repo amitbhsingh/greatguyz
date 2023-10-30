@@ -13,9 +13,10 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.14",
-    "@types/express-session": "^1.17.8",
+    "@types/express-session": "^1.17.9",
     "@types/mongoose": "^5.11.97",
     "@types/passport": "^1.0.13",
+    "@types/passport-facebook": "^3.0.2",
     "@types/passport-google-oauth20": "^2.0.12",
     "@types/passport-local": "^1.0.36",
     "express-session": "^1.17.3",
@@ -33,6 +34,7 @@
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.0",
     "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
     "passport-google-oidc": "^0.1.0",
     "passport-local": "^1.0.0"
   }

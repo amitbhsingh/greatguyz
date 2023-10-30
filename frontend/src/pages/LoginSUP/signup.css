@@ -1,8 +1,4 @@
-/* src/SignUp.css */
-/* src/SignUp.css */
-
-
-.signup-form{
+.signup-container{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,8 +19,10 @@
   
 }
 
+
 .singupinput{
   align-self: center;
+
   
 }
 .signupname , .singuplname,.signupemail,.singuppassword{
@@ -33,6 +31,16 @@
 }
 
 .textlabel{
+  position: relative;
+  top: 50px;
+  left: 15px;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #F2D8D8;
+}
+ .input{
   position: relative;
   top: 50px;
   left: 15px;

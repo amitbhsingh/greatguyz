@@ -1,0 +1,24 @@
+.contact-form{
+  font-weight: bolder;
+  font-size: larger;
+  color: #F2D8D8;
+  background-color: #374259;
+  flex: 1 0 calc(33.33% - 20px); /* Adjust the width of each box (33.33% for 3 boxes per row) */
+  margin: 11px;
+  border: 2px solid #374259;;
+  padding: 10px;
+  text-align: center;
+  border-radius: 14px;
+  min-width: 500px auto;
+  min-height: 500px;
+}
+
+.cfname, .cflname, .cfemail, .cfcontact{
+  list-style-type: none;
+  font-size: small;
+
+}
+.contactush1{
+  text-align: center;
+  
+}

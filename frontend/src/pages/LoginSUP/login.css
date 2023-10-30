@@ -77,7 +77,7 @@
   font-size: larger;
   font-weight: bold;
 }
-.btn-google{
+.btn-google, .btn-facebook{
   background-color: #F2D8D8;
   color: #374259;
   padding: 10px 18px;
@@ -89,7 +89,7 @@
   align-self: center;
   text-decoration: none;
 }
-.btn-google:hover{
+.btn-google:hover,.btn-facebook:hover{
   background-color: #2c3550;
   color: #F2D8D8;
 }

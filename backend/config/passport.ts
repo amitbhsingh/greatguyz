@@ -1,11 +1,17 @@
 import passport from 'passport';
 import mongoose from 'mongoose';
-import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as FacebookStrategy} from 'passport-facebook';
 import bcrypt from 'bcrypt';
 import User from '../models/user'; // Adjust path as per your project structure
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import express, {Request, Response}  from 'express'
+const router= express.Router();
+import { Strategy as LocalStrategy } from 'passport-local';
+import session from 'express-session';
 import dotenv, { config } from 'dotenv'
 dotenv.config();
+
+
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID || '',
@@ -45,7 +51,7 @@ passport.use(new GoogleStrategy({
 }));
 
 passport.serializeUser((user: any, done) => {
-  done(null, user._id); // Here, we are storing only the user's ID in the session
+  done(null, user._id); 
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -56,3 +62,72 @@ passport.deserializeUser(async (id, done) => {
     done(error);
   }
 });
+
+// FACEBOOK AUTHENTICATION WITH PASSPORT COMMENCING HERE 
+
+// passport.use(new FacebookStrategy(
+//     {
+//       clientID: process.env.FACEBOOK_CLIENT_ID || '',
+//       clientSecret: process.env.FACEBOOK_SECRET_KEY || '',
+//       callbackURL: process.env.FACEBOOK_CALLBACK_URL || '',
+//     },
+//     async function (accessToken, refreshToken, profile, cb) {
+//       const user = await User.findOne({
+//         accountId: profile.id,
+//         provider: 'facebook',
+//       });
+//       if (!user) {
+//         console.log('Adding new facebook user to DB..');
+//         const user = new User({
+//           accountId: profile.id,
+//           name: profile.displayName,
+//           provider: profile.provider,
+//         });
+//         await user.save();
+//         // console.log(user);
+//         return cb(null, profile);
+//       } else {
+//         console.log('Facebook User already exist in DB..');
+//         // console.log(profile);
+//         return cb(null, profile);
+//       }
+//     }
+//   )
+// );
+
+// router.get('/', passport.authenticate('facebook', { scope: 'email' }));
+
+// router.get(
+//   '/callback',
+//   passport.authenticate('facebook', {
+//     failureRedirect: '/auth/facebook/error',
+//   }),
+//   function (req: Request, res: Response) {
+//     // Successful authentication, redirect to success screen.
+//     res.redirect('/auth/facebook/success');
+//   }
+// );
+
+// // router.get('/success', async (req: Request, res: Response) => {
+// //   const userInfo = {
+// //     id: req.session.passport.user.id,
+// //     displayName: req.session.passport.user.displayName,
+// //     provider: req.session.passport.user.provider,
+// //   };
+// //   res.render('fb-github-success', { user: userInfo });
+// // });
+
+// router.get('/error', (req: Request, res: Response) => res.send('Error logging in via Facebook..'));
+
+// router.get('/signout', (req: Request, res: Response) => {
+//   try {
+//     req.session.destroy(function (err) {
+//       console.log('session destroyed.');
+//     });
+//     res.render('auth');
+//   } catch (err) {
+//     res.status(400).send({ message: 'Failed to sign out fb user' });
+//   }
+// });
+
+// module.exports = router;

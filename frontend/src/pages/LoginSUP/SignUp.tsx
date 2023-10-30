@@ -1,19 +1,28 @@
-// src/SignUp.tsx
+
 import './signup.css'
 import React, { useState } from 'react';
+// import {Link} from 'react-router-dom'
+import axios from 'axios';
 
-interface SignUpProps {
-  onSignUp: (email: string, password: string) => void;
-}
 
-const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
+
+
+// interface SignUpProps {
+//   onSignUp: (email: string, password: string) => void;
+// }
+
+function SignUp() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSignUp(email, password);
+    axios.post('http://localhost:3000/', {name, email, password})
+    .then((result: any) => console.log(result))
+    .catch((err: any)=> console.log(err))
   };
+
 
   return (
     <>
@@ -21,16 +30,30 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
     <div className="signup-container">
       <form onSubmit={handleSubmit} className="signup-form">
         <div className="input-group">
-          <label className='textlabel'>Name :</label>
-          <input placeholder='First Name' className='signupname' type="fname" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <label className='textlabel'>Last Name :</label>
-          <input placeholder='Last Name' className='singuplname' type="lname" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <label className='textlabel'>Email:</label>
-          <input placeholder='Email' className='signupemail' type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div className="input-group">
-          <label  className='textlabel' >Password:</label>
-          <input placeholder='Password' className='singuppassword' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          {/* <label className='textlabel'>Name :</label> */}
+          <input 
+            type="text"
+            placeholder='First Name' 
+            name="name"
+            className='form-control rounded-0'
+            onChange={(e) => setName(e.target.value)} 
+            />
+          {/* <label className='textlabel'>Email :</label> */}
+          <input 
+            type="text"
+            placeholder='Email' 
+            name="email"
+            className='form-control rounded-0'
+            onChange={(e) => setEmail(e.target.value)} 
+            />
+          {/* <label className='textlabel'>Password:</label> */}
+          <input 
+            type="text"
+            placeholder='Password' 
+            name="password"
+            className='form-control rounded-0'
+            onChange={(e) => setPassword(e.target.value)} 
+            />
         </div>
         <button className='signup-button' type="submit">Sign Up</button>
       </form>
