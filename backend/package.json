@@ -15,7 +15,7 @@
     "@types/cors": "^2.8.14",
     "@types/express-session": "^1.17.9",
     "@types/mongoose": "^5.11.97",
-    "@types/passport": "^1.0.13",
+    "@types/passport": "^1.0.14",
     "@types/passport-facebook": "^3.0.2",
     "@types/passport-google-oauth20": "^2.0.12",
     "@types/passport-local": "^1.0.36",

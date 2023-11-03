@@ -1,4 +1,6 @@
-.signup-container{
+/* src/SignUp.css */
+
+.signup-form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,68 +17,24 @@
   flex-direction: column;
   gap: 16px;
   box-sizing: border-box; /*eep padding within the defined width */
-  
-  
+  padding-bottom: 80px;
 }
 
-
-.singupinput{
-  align-self: center;
-
-  
-}
-.signupname , .singuplname,.signupemail,.singuppassword{
-  align-self: center;
-  
-}
-
-.textlabel{
-  position: relative;
-  top: 50px;
-  left: 15px;
+.input-group {
+  display: flex;
   flex-direction: column;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #F2D8D8;
-}
- .input{
-  position: relative;
-  top: 50px;
-  left: 15px;
-  flex-direction: column;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #F2D8D8;
+  margin-bottom: 30px;
 }
 
-.emailin{
+.emailinSignup, .passwordinSignup, .confirmPasswordinSignup {
   align-self: center;
+  width: 350px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
-/* .email, .password{
-  align-self: center;
-  
-  color:#F2D8D8;
-  padding-right: 10px; 
-} */
 
-
-
-
-
-
-.signupname,.singuplname,.signupemail,.singuppassword{
-  
-  
-  width: 350px ; /* Set input width to 100% for full width */
-  padding: 12px; /* Increase padding for larger input */
-  font-size: 16px; /* Increase font size for larger input */
-  border-radius: 10px;
-  
-
-}
- 
 .signup-button {
   padding: 10px 18px;
   background-color: #F2D8D8;
@@ -89,21 +47,48 @@
   align-self: center;
 }
 
-
 .signup-button:hover {
   background-color: #2c3550;
   color: #F2D8D8;
 }
 
-.signuph2{
+.signuptext {
   position: inherit;
   line-height: 4rem;
-  color:#374259;
+  color: #374259;
   text-align: center;
+  vertical-align: middle;
   font-weight: bolder;
   margin-top: 100px;
   margin-right: 10px;
   font-size: 30px;
   margin-bottom: auto;
   margin-top: auto;
+}
+
+.emailSignup, .passwordSignup, .confirmPasswordSignup {
+  color: #F2D8D8;
+  text-align: center;
+  vertical-align: middle;
+  padding-bottom: 10px;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.btn-googleSignup, .btn-facebookSignup {
+  background-color: #F2D8D8;
+  color: #374259;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 9px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  text-decoration: none;
+}
+
+.btn-googleSignup:hover, .btn-facebookSignup:hover {
+  background-color: #2c3550;
+  color: #F2D8D8;
 }

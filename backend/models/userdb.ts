@@ -1,12 +1,15 @@
-// import mongoose, { mongo } from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
-// const UserData= new mongoose.Schema({
-//   name: String,
-//   email: String,
-//   password: String
+const LocalUserData= new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String
   
-// })
+})
 
 
 
-// module.exports = mongoose.model("users", UserData)
+
+const LocalUser = mongoose.model('LocalRegisters', LocalUserData);
+
+export default LocalUser;

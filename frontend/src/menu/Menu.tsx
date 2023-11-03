@@ -7,7 +7,7 @@ import veggie from '../assets/veggie.png'
 import spicy from '../assets/spicy.png'
 import tandoori from '../assets/tandoori.png'
 import { useState } from 'react'
-  
+
 
 
 
@@ -30,6 +30,7 @@ const Menu = () => {
   return (
     <div className="box-container">
     <div className="box">
+      <h1>Hello  </h1>
     <button className='incdec' onClick={increase}> + </button>
     <img className='burger-img' src={classic} alt="Image 1" style={{borderRadius:"1rem"}}/>  
     <button className='incdec' onClick={decrease} >-</button>
@@ -43,15 +44,7 @@ const Menu = () => {
       <br />
       <button className='cart1'  > Add to cart</button>
       <br />
-      
-      
-      
-      
-      
-      
-      
-      
-      
+  
     </div>
     <div className="box">
       <img className='burger-img' src={veggie} alt="Image 2" style={{borderRadius:"1rem"}} />

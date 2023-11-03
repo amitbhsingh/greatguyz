@@ -33,9 +33,6 @@ const Login: React.FC = () => {
   };
 
 
-
-  
-
   return (
     <div>
       <h2 className='logintext'>Login</h2>
@@ -52,10 +49,7 @@ const Login: React.FC = () => {
         <button className='login-button' type="submit" >  Login <LoginIcon /></button>
         <a className="btn-google" href="http://localhost:3000/auth/google"><GoogleIcon /> Login with Google</a>
         {/* <button className='login-button' type="button" onClick={handleGoogleLogin} > Join Us With Google</button> */}
-        <button className='login-button' type="button"> 
-        <a className="btn-facebook" href="http://localhost:3000/auth/facebook"> <FacebookIcon /> Login with Facebook</a></button>
-        
-        
+        <a className="btn-facebook" href="http://localhost:3000/auth/facebook"> <FacebookIcon /> Login with Facebook</a>
       </form>
     </div>
   );

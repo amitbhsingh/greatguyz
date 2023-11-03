@@ -1,24 +1,78 @@
-.contact-form{
-  font-weight: bolder;
-  font-size: larger;
-  color: #F2D8D8;
+.contactush1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.contact-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
   background-color: #374259;
-  flex: 1 0 calc(33.33% - 20px); /* Adjust the width of each box (33.33% for 3 boxes per row) */
-  margin: 11px;
-  border: 2px solid #374259;;
-  padding: 10px;
-  text-align: center;
-  border-radius: 14px;
-  min-width: 500px auto;
-  min-height: 500px;
-}
-
-.cfname, .cflname, .cfemail, .cfcontact{
-  list-style-type: none;
-  font-size: small;
-
-}
-.contactush1{
-  text-align: center;
+  border:none;
+  padding: 30px;
+  border-radius: 6em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width:90%; /* Set initial width using percentage */
+  max-width: 600px auto;
+  margin: auto; /* Center the form horizontally */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-sizing: border-box; /*eep padding within the defined width */
+  padding-bottom: 80px;
   
+}
+
+.reachout {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #F2D8D8;
+}
+
+.input-container {
+  align-self: center;
+  width: 350px;
+  padding: 12px;
+  font-size: 16px;
+  
+  border-radius: 8px;
+}
+
+.cfname-label,
+.cflname-label,
+.cfemail-label,
+.cfcontact-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #F2D8D8;;
+}
+
+.cfname-input,
+.cflname-input,
+.cfemail-input,
+.cfcontact-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.cfsubmit {
+  background-color: #F2D8D8;
+  color: #374259;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 9px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: auto;
+  text-decoration: none;
+}
+
+.cfsubmit:hover {
+  background-color: #2c3550;
+  color: #F2D8D8;
 }

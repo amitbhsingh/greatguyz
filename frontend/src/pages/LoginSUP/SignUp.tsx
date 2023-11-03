@@ -1,65 +1,64 @@
-
-import './signup.css'
+import axios from 'axios'
+import './signup.css'  // Note: You will need to create or modify a 'signup.css' for styling
 import React, { useState } from 'react';
-// import {Link} from 'react-router-dom'
-import axios from 'axios';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GoogleIcon from '@mui/icons-material/Google';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import {Link, useNavigate} from 'react-router-dom';
 
+const signUp: React.FC = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const navigate=useNavigate()
 
-
-
-// interface SignUpProps {
-//   onSignUp: (email: string, password: string) => void;
-// }
-
-function SignUp() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/', {name, email, password})
-    .then((result: any) => console.log(result))
-    .catch((err: any)=> console.log(err))
+
+    // Basic validation to ensure password and confirm password match
+    if (password !== confirmPassword) {
+      console.error("Passwords do not match.");
+      return;
+    }
+
+    // Send a POST request to your backend for signup
+    axios.post('/signup', {
+        email: email,
+        password: password
+    })
+    .then(response => {
+        console.log(response);
+        navigate('/login')
+        // Handle successful signup here, e.g., store JWT, redirect, etc.
+    })
+    .catch(error => {
+        console.error('Signup error', error);
+    });
   };
 
-
   return (
-    <>
-    <h2 className='signuph2'>Sign Up</h2>
-    <div className="signup-container">
-      <form onSubmit={handleSubmit} className="signup-form">
-        <div className="input-group">
-          {/* <label className='textlabel'>Name :</label> */}
-          <input 
-            type="text"
-            placeholder='First Name' 
-            name="name"
-            className='form-control rounded-0'
-            onChange={(e) => setName(e.target.value)} 
-            />
-          {/* <label className='textlabel'>Email :</label> */}
-          <input 
-            type="text"
-            placeholder='Email' 
-            name="email"
-            className='form-control rounded-0'
-            onChange={(e) => setEmail(e.target.value)} 
-            />
-          {/* <label className='textlabel'>Password:</label> */}
-          <input 
-            type="text"
-            placeholder='Password' 
-            name="password"
-            className='form-control rounded-0'
-            onChange={(e) => setPassword(e.target.value)} 
-            />
+    <div>
+      <h2 className='signuptext'>Sign Up</h2>
+      <form className='signup-form' onSubmit={handleSubmit}>
+        <div className='input-group'>
+          <label className='emailSignup' >Email </label>
+          <input className='emailinSignup' placeholder='User Name' type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <button className='signup-button' type="submit">Sign Up</button>
+        <div className='input-group'>
+          <label className='passwordSignup' >Password </label>
+          <input className='passwordinSignup' placeholder='Password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <div className='input-group'>
+          <label className='confirmPasswordSignup'>Confirm Password </label>
+          <input className='confirmPasswordinSignup' placeholder='Confirm Password' type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        </div>
+        <Link to='login' className='signup-button' type="submit" >  Signup <PersonAddIcon /></Link>
+        <a className="btn-googleSignup" href="http://localhost:3000/auth/google/signup"><GoogleIcon /> Signup with Google</a>
+        <a className="btn-facebookSignup" href="http://localhost:3000/auth/facebook/signup"> <FacebookIcon /> Signup with Facebook</a>
       </form>
     </div>
-    </>
   );
 };
 
-export default SignUp;
+export default signUp;
