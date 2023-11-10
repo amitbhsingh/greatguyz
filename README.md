@@ -1,5 +1,10 @@
 # React + TypeScript + Vite
-### install elsint as dev dependencies
+### install elsint as dev dependencies for frontend
+
+### Vite test
+> npm install -D vitest
+
+
 > npm i -D eslint 
 
 
@@ -15,10 +20,8 @@
 > npm i -D prettier eslint-config-prettier eslint-plugin-prettier
 
 
-> npm i -D nodemon  
 
-### Vite test
-> npm install -D vitest
+
 
 
 #### testing library react and jestdom
