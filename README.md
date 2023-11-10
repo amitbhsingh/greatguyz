@@ -1,10 +1,21 @@
 # React + TypeScript + Vite
-### how to install elsint as dev dependencies
-> npm i -D eslint
+### install elsint as dev dependencies
+> npm i -D eslint 
+
+
 > npx eslint --init
+
+
 > npx install-peerdeps --dev eslint-config-airbnb
+
+
 > npm i -D eslint-config-airbnb-typescript
+
+
 > npm i -D prettier eslint-config-prettier eslint-plugin-prettier
+
+
+> npm i -D nodemon  
 
 ### Vite test
 > npm install -D vitest
@@ -20,6 +31,7 @@
 > cd server 
 > npm init -f
 > npm i --save express
+> npm i -D nodemon
 
 
 
