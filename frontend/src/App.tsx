@@ -1,4 +1,7 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Provider } from 'react-redux'
+import { store } from './store'
+
 import Menu from './menu/Menu';
 import NotFound from './pages/NotFound';
 import Contact from './pages/Contact';
@@ -40,9 +43,11 @@ export function App() {
 }
 export function WrappedApp(){
   return ( 
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   
   );
 }

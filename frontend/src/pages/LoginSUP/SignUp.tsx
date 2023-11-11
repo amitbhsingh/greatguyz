@@ -6,10 +6,10 @@ import GoogleIcon from '@mui/icons-material/Google';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {Link, useNavigate} from 'react-router-dom';
 
-const signUp: React.FC = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+const SignUp: React.FC = () => {
+  const [email, setEmail] = useState<any>("");
+  const [password, setPassword] = useState<any>("");
+  const [confirmPassword, setConfirmPassword] = useState<any>("");
   const navigate=useNavigate()
 
 
@@ -23,9 +23,9 @@ const signUp: React.FC = () => {
     }
 
     // Send a POST request to your backend for signup
-    axios.post('/signup', {
-        email: email,
-        password: password
+    axios.post('http://localhost:3000/register', {
+        email,
+        password
     })
     .then(response => {
         console.log(response);
@@ -40,18 +40,19 @@ const signUp: React.FC = () => {
   return (
     <div>
       <h2 className='signuptext'>Sign Up</h2>
-      <form className='signup-form' onSubmit={handleSubmit}>
+      <form action="login" method='post' className='signup-form' onSubmit={handleSubmit}>
         <div className='input-group'>
           <label className='emailSignup' >Email </label>
-          <input className='emailinSignup' placeholder='User Name' type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" className='emailinSignup' placeholder='Enter Name' value={email} onChange={(e) => setEmail(e.target.value)} 
+          />
         </div>
         <div className='input-group'>
           <label className='passwordSignup' >Password </label>
-          <input className='passwordinSignup' placeholder='Password' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type='password' className='passwordinSignup' placeholder='Enter Password' value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
         </div>
         <div className='input-group'>
           <label className='confirmPasswordSignup'>Confirm Password </label>
-          <input className='confirmPasswordinSignup' placeholder='Confirm Password' type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <input type='password' className='confirmPasswordinSignup' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} autoComplete="new-password" />
         </div>
         <Link to='login' className='signup-button' type="submit" >  Signup <PersonAddIcon /></Link>
         <a className="btn-googleSignup" href="http://localhost:3000/auth/google/signup"><GoogleIcon /> Signup with Google</a>
@@ -61,4 +62,4 @@ const signUp: React.FC = () => {
   );
 };
 
-export default signUp;
+export default SignUp;

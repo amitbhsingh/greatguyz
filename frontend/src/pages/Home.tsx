@@ -1,11 +1,20 @@
 // import { color } from "@mui/system"
 // import React, { useEffect, useState } from "react"
 import './Home.css'
+
+import { useAppSelector } from '../hooks'
+
+import { selectIsAuthenticated } from '../features/auth/authSlice'
+
 function Home(){
+  console.log(1)
+  console.log(useAppSelector((state) => state.auth.isAuthenticated))
   return (
-    <> <h1 className="welcome" style={{color:"#374259"}}>Welcome to home of GreatGuys</h1> 
+    <> 
+    {/* <h1 className="welcome" style={{color:"#374259"}}>Welcome to home of GreatGuys</h1> 
     <h2 className="welcome" style={{color:"#374259"}} >Award</h2>
-    <link href="https://awards.infcdn.net/circle_v2.css" rel="stylesheet"/><div id="circle_v2" className="Award"> <div class="data_test arc-heading "> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="160px" height="160px" viewBox="0 0 160 160"> <defs> <path id="heading-arc" d="M 30 80 a 50 50 0 1 1 100 0"></path> </defs> <text class="arc-heading__heading " fill="#000" text-anchor="middle"> <textPath startOffset="50%" xlink:href="#heading-arc">Recommended</textPath> </text> </svg> </div> <div class="sq_year">2023</div> <a href="https://restaurant-guru.in/Great-Guys-Vadodara" class="sq_center " target="_blank">Great Guys</a> <div class="arc-heading arc-heading__bottom"> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120px" height="120px" viewBox="0 0 120 120"> <defs> <path id="subheading-arc" d="M 12 60 a 48 48 0 0 0 96 0"></path> </defs> <text class="arc-heading__subheading" fill="#000" text-anchor="middle"> <textPath startOffset="50%" xlink:href="#subheading-arc"><a href="https://restaurantguru.com" target="_blank">Restaurant Guru</a></textPath> </text> </svg> </div></div>
+    <link href="https://awards.infcdn.net/circle_v2.css" rel="stylesheet"/><div id="circle_v2" className="Award"> <div className="data_test arc-heading "> <svg xmlns="http://www.w3.org/2000/svg" xlinkHref="http://www.w3.org/1999/xlink" width="160px" height="160px" viewBox="0 0 160 160"> <defs> <path id="heading-arc" d="M 30 80 a 50 50 0 1 1 100 0"></path> </defs> <text className="arc-heading__heading " fill="#000" textAnchor="middle"> <textPath startOffset="50%" xlink:href="#heading-arc">Recommended</textPath> </text> </svg> </div> <div className="sq_year">2023</div> <a href="https://restaurant-guru.in/Great-Guys-Vadodara" className="sq_center " target="_blank">Great Guys</a> <div className="arc-heading arc-heading__bottom"> <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120px" height="120px" viewBox="0 0 120 120"> <defs> <path id="subheading-arc" d="M 12 60 a 48 48 0 0 0 96 0"></path> </defs> <text className="arc-heading__subheading" fill="#000" text-anchor="middle"> <textPath startOffset="50%" xlink:href="#subheading-arc"><a href="https://restaurantguru.com" target="_blank">Restaurant Guru</a></textPath> </text> </svg>  */}
+    
       <div className="App">
 
          

@@ -12,13 +12,14 @@ import dotenv, { config } from 'dotenv'
 dotenv.config();
 
 const app=express();
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID || '',
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+  clientID: process.env.GOOGLE_CLIENT_ID || '416587268578-p6aoqgvrrm60mchbriivjlh62lgtg312.apps.googleusercontent.com',
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || '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',
   callbackURL: 'http://localhost:3000/auth/google/callback'
   
 }, async (accessToken, refreshToken, profile, done) => {
@@ -47,59 +48,61 @@ passport.use(new GoogleStrategy({
     }
 
     // Return user
-    done(null,user);
+    done(null, user);
   } catch (error) {
     done(typeof error);
   }
 }));
 
 passport.serializeUser((user: any, done) => {
+  console.log("SERIALIZE")
   done(null, user._id); 
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
+    console.log("DESERIALIZE")
     const user = await User.findById(id).exec();
     done(null, user); // Here, we are retrieving the full user object from the database using the ID stored in the session
   } catch (error) {
+    console.log("ERROR")
     done(error);
   }
 });
 
-// // FACEBOOK AUTHENTICATION WITH PASSPORT COMMENCING HERE 
-
+ // FACEBOOK AUTHENTICATION WITH PASSPORT COMMENCING HERE 
 passport.use(new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_CLIENT_ID || '',
-      clientSecret: process.env.FACEBOOK_SECRET_KEY || '',
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL || '',
-    },
-    async function (accessToken, refreshToken, profile, cb) {
-      const user = await fbUser.findOne({
-        accountId: profile.id,
-        provider: 'facebook',
+  {
+    clientID: process.env.FACEBOOK_CLIENT_ID || '',
+    clientSecret: process.env.FACEBOOK_SECRET_KEY || '',
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL || '',
+  },
+  async function (accessToken, refreshToken, profile, cb) {
+    let user = await fbUser.findOne({ facebookId: profile.id });
+    
+    if (!user) {
+      console.log('Adding new facebook user to DB..');
+      console.log('facebook', profile);
+      
+      user = new fbUser({
+        facebookId: profile.id,      // Corrected this line
+        name: profile.displayName,
+        provider: profile.provider,
+        profilePicture: profile.photos ? profile.photos[0].value : undefined
       });
-      if (!user) {
-        console.log('Adding new facebook user to DB..');
-        console.log('facebook',profile)
-        const user = new fbUser({
-          accountId: profile.id,
-          name: profile.displayName,
-          provider: profile.provider,
-        });
-        await user.save();
-        console.log(user);
-        return cb(null, profile);
-      } else {
-        console.log('Facebook User already exist in DB..');
-        // console.log(profile);
-        return cb(null, profile);
-      }
+      
+      await user.save();
+      console.log('user Save', user);
+      return cb(null, user);
+    } else {
+      console.log('Facebook User already exist in DB..');
+      return cb(null, user);
     }
-  )
-);
+  }
+));
 
-router.get('/', passport.authenticate('facebook', { scope: 'email' }));
+
+router.get('/', passport.authenticate('facebook', { scope: ['email','public_profile'] }));
 
 router.get(
   '/callback',
@@ -112,17 +115,6 @@ router.get(
   }
 );
 
-
-
-
-// router.get('/success', async (req: Request, res: Response) => {
-//   const userInfo = {
-//     id: req.session.passport.user.id,
-//     displayName: req.session.passport.user.displayName,
-//     provider: req.session.passport.user.provider,
-//   };
-//   res.render('fb-github-success', { user: userInfo });
-// });
 
 router.get('/error', (req: Request, res: Response) => res.send('Error logging in via Facebook..'));
 
@@ -137,4 +129,27 @@ router.get('/signout', (req: Request, res: Response) => {
   }
 });
 
+
+// Local strategy with passportjs
+
+// passport.use(new LocalStrategy(
+//   function(username, password, done) {
+//     User.findOne({ username: username }, function ( err: typeof , user) {
+//       if (err) { return done(err); }
+//       if (!user) { return done(null, false); }
+//       if (!user.verifyPassword(password)) { return done(null, false); }
+//       return done(null, user);
+//     });
+//   }
+// ));
+
+// app.post('/login', 
+//   passport.authenticate('local', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   });
+
 module.exports = router;
+
+
+

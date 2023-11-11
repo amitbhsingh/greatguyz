@@ -2,7 +2,7 @@
 
 ## Overview
 
-GreatGuys Eatery is a web application designed to revolutionize the fast food industry by offering a mouthwatering and guilt-free vegetarian dining experience. Our mission is to provide chef-inspired dishes that cater to diverse tastes and dietary preferences, emphasizing sustainability, health, and taste.
+GreatGuys is a web application designed to revolutionize the fast food industry by offering a mouthwatering and guilt-free vegetarian dining experience. Our mission is to provide chef-inspired dishes that cater to diverse tastes and dietary preferences, emphasizing sustainability, health, and taste.
 
 ## Features
 

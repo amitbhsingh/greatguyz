@@ -30,7 +30,7 @@ const Menu = () => {
   return (
     <div className="box-container">
     <div className="box">
-      <h1>Hello  </h1>
+      
     <button className='incdec' onClick={increase}> + </button>
     <img className='burger-img' src={classic} alt="Image 1" style={{borderRadius:"1rem"}}/>  
     <button className='incdec' onClick={decrease} >-</button>

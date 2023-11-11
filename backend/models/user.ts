@@ -26,9 +26,13 @@ const userSchema = new mongoose.Schema({
   photo: {
     type: String,
     required: false
-  }
+  },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const User = mongoose.model('Customer', userSchema);
+const User = mongoose.model('Google_Customer', userSchema);
 
 export default User;

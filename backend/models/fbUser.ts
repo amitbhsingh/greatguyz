@@ -15,11 +15,19 @@ const facebookUserSchema = new mongoose.Schema({
         givenName: String,
         middleName: String
     },
+    created: {
+        type: Date,
+        default: Date.now,
+      },
     gender: String,
     profileUrl: String,
     provider: {
         type: String,
         default: 'facebook'
+    },
+    profilePicture: {
+        type: String,
+        default: ''
     },
     _raw: String,
     _json: {

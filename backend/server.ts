@@ -4,36 +4,32 @@ import session from 'express-session';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import LocalUserData from './models/userdb'
-import mongoose, { mongo } from 'mongoose';
-import User from './models/user';
+// import mongoose from 'mongoose';
+// import User from './models/user';
 import './config/passport';  // Assuming you are setting up passport in this file
+import bcrypt from 'bcrypt'
 import connectDatabase from './config/database';
-dotenv.config();
-// connectDatabase()
+dotenv.config({ path: './.env-copy' });
 
 const app = express();
 app.use(express.json());
-
-app.get('/profile', async (req, res) => {
-  const user = await User.findOne({ email: "amit.bh.singh@gmail.com" });
-  res.render('profile', { user });
-});
-
+app.use(express.urlencoded({extended: true}))
 
 app.use(cors({
   origin: 'http://localhost:5173', // or your frontend server's address
   credentials: true  // To support credentials like cookies
 }));
 
-// mongoose.connect("process.env.MONGO_URI")
-
-
 // Set up session
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default_secret', // Use SESSION_SECRET from your .env file, or a default string
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
+ cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // Equals 1 day
+  }
 }));
+
 
 // Initialize passport and its session
 app.use(passport.initialize());
@@ -55,9 +51,9 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
-  (req, res) => {
+  (req: Request, res: Response) => {
     // Successful authentication, redirect to your frontend application
-    res.redirect('http://localhost:5173/menu');  // Adjust the URL as needed
+    res.redirect('http://localhost:5173/');  // Adjust the URL as needed
   }
 );
 
@@ -65,23 +61,35 @@ app.get('/auth/google/callback',
 
 //Facebook authentication
 app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', {scope: 'email'} ));
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:5173/menu');
+    res.redirect('http://localhost:5173/');
   });
-app.post('http://localhost:5173/signup',(req: Request, res: Response)=>{
-  LocalUserData.create(req.body)
-  .then(signup => res.json(signup))
-  .catch( err => res.json(err))
-});
+
+  app.post('/register', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req: Request, res: Response) {
+    res.redirect('/');
+  });
+
+  app.post('/register', (req: Request, res: Response)=> {
+    LocalUserData.create(req.body)
+    .then(employees=>res.json(employees))
+    .catch(err=> res.json(err))
+  })
+
+  // app.get('/',(req,res)=>{
+  //   res.send('<h1>hello </h1>')
+  // })
 
 // Start the server
 app.listen(3000, () => {
   console.log('server is running on http://localhost:3000');
   connectDatabase();  // Connect to MongoDB when the server starts
 });
+
 

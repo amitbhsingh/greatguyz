@@ -1,24 +1,21 @@
 import axios from 'axios'
 import './login.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import LoginIcon from '@mui/icons-material/Login';
 
+import { useAppSelector } from '../../hooks'
+
+import { selectIsAuthenticated } from '../../features/auth/authSlice'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-//   const handleGoogleLogin = () => {
-//     // Redirect to the backend Google authentication route
-//     window.location.href = "http://localhost:5173/#/login"
-// };
-
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
   const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-
-      // Send a POST request to your backend for login
       axios.post('http://localhost:3000/users/login', {
           email: email,
           password: password

@@ -68,7 +68,8 @@
   font-size: 19px;
   font-weight: bold;
   cursor: pointer;
-  align-self: auto;
+  position: absolute;
+  left: 45%;
   text-decoration: none;
 }
 
