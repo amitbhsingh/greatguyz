@@ -19,10 +19,13 @@ const Login: React.FC = () => {
       e.preventDefault();
 
       // Send a POST request to your backend for login
-      axios.post('http://localhost:3000/users/login', {
-          email: email,
-          password: password
-      })
+      axios.post('http://localhost:3000/login', {
+        username: email, password
+    }, {headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:5173/'
+            }})
       .then(response => {
           console.log(response.data);
           // Handle successful login here, e.g., store JWT, redirect, etc.
