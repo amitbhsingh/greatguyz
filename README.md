@@ -1,72 +1,34 @@
-# React + TypeScript + Vite
-### install elsint as dev dependencies for frontend
+# GreatGuys Eatery Web Application
 
-### Vite test
-> npm install -D vitest
+## Overview
 
+GreatGuys Eatery is a web application designed to revolutionize the fast food industry by offering a mouthwatering and guilt-free vegetarian dining experience. Our mission is to provide chef-inspired dishes that cater to diverse tastes and dietary preferences, emphasizing sustainability, health, and taste.
 
-> npm i -D eslint 
+## Features
 
+- **User Authentication:** Allows users to sign up and log in using either their email and password or through third-party services like Google and Facebook.
+- **Profile Management:** Users can view and edit their profiles.
+- **Menu:** A detailed menu showcasing the restaurant's offerings.
+- **Contact Form:** Users can reach out to us through a contact form.
+- **About Us Page:** Information about the mission and values of GreatGuys Eatery.
 
-> npx eslint --init
+## Tech Stack
 
+- **Frontend:** [React](https://reactjs.org/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** CSS with support for responsive design
+- **Backend:** [Node.js](https://nodejs.org/), [Express](https://expressjs.com/)
+- **Database:** [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/)
+- **Authentication:** [Passport.js](http://www.passportjs.org/) with Google OAuth and Facebook OAuth strategies
+- **Session Management:** `express-session` with `connect-mongo` for session storage
+- **Testing:** Vite, Vitest, Testing Library for React, Jest-DOM
+- **Linting and Formatting:** ESLint, Prettier
 
-> npx install-peerdeps --dev eslint-config-airbnb
+## Development Setup
 
+To get started with development, follow these steps:
 
-> npm i -D eslint-config-airbnb-typescript
+1. Clone the repository.
+2. Navigate to the project folder and install dependencies.
 
-
-> npm i -D prettier eslint-config-prettier eslint-plugin-prettier
-
-
-
-
-
-
-#### testing library react and jestdom
-> npm i -D @testing-library/react @testing-library/jest-dom
-
-> npm install react-router-dom
-
-# Backend
-> create a server folder 
-> cd server 
-> npm init -f
-> npm i --save express
-> npm i -D nodemon
-
-
-
-
-
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-
-
-
+```bash
+npm install
