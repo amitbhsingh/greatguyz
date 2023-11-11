@@ -1,4 +1,4 @@
-# GreatGuys Eatery Web Application
+# GreatGuys Web Application
 
 ## Overview
 
