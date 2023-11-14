@@ -2,9 +2,9 @@
 // import React, { useEffect, useState } from "react"
 import './Home.css'
 
-import { useAppSelector } from '../hooks'
+import { useAppSelector } from '../../hooks'
 
-import { selectIsAuthenticated } from '../features/auth/authSlice'
+import { selectIsAuthenticated } from '../../features/auth/authSlice'
 
 function Home(){
   console.log(1)

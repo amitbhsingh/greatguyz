@@ -1,5 +1,5 @@
 import './about.css'
-import founder from '../assets/founder.jpg'
+import founder from '../../assets/founder.jpg'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { Link } from 'react-router-dom';

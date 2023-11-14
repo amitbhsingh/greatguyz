@@ -1,22 +1,13 @@
 import {Container,Nav,Navbar} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Navbar.css'
-import logo from '../assets/logo.png'
-import { Link, Route } from 'react-router-dom';
-// import { color } from '@mui/system';
+import logo from '../../assets/logo.png'
+import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Menu from '../menu/Menu'
-// function productCount=()=>{
-//   (count,setCount)=useState('');
-// }
+
 
 const TopBar = () => {
   
-// const isAuthenticated=()=>{
-//   false;
-// }
-// const user=false;
-
   return (
     <>
       <Navbar className='clr' bg="myred" data-bs-theme="dark"  >
@@ -33,14 +24,12 @@ const TopBar = () => {
             <Nav.Link as={Link} to=""><p>|</p> </Nav.Link>
             <Nav.Link className='space-ed' as={Link} to="/signup"> Sign Up</Nav.Link>
             
-            <Nav.Link  as = {Link} to="/cart" className="cart"> < ShoppingCartIcon /> </Nav.Link>
+            <Nav.Link  as={Link} to="/cart" > < ShoppingCartIcon /> </Nav.Link>
             <div></div>
 
           </Nav>
         </Container>
-      </Navbar>
-      
-
+      </Navbar> 
     </>
   )
 }

@@ -1,16 +1,15 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import { Provider } from 'react-redux'
-import { store } from './store'
-
+import { store } from './redux/store'
 import Menu from './menu/Menu';
 import NotFound from './pages/NotFound';
-import Contact from './pages/Contact';
-import TopBar from './components/TopBar';
-import Home from './pages/Home';
-import AboutUs from './pages/AboutUs'
+import Contact from './pages/contact/Contact';
+import TopBar from './components/navbar/TopBar';
+import Home from './pages/home/Home';
+import AboutUs from './pages/about/AboutUs'
 import Login from './pages/LoginSUP/Login';
 import SignUp from './pages/LoginSUP/SignUp';
-
+import Cart from './components/cart/Cart'
 
 export function App() {
   const handleLogin = (email: string, password: string) => {
@@ -31,13 +30,11 @@ export function App() {
           <Route path= "menu" element= {<Menu />} />
           <Route path= "contact" element= {<Contact />} />
           <Route path= "about" element= {<AboutUs />} />
-          <Route path= "login" element= {<Login onLogin={handleLogin} />} />
-          <Route path= "signup" element= {<SignUp onSignUp={handleSignUp} />} />
+          <Route path= "login" element= {<Login {...handleLogin} />} />
+          <Route path= "signup" element= {<SignUp {...handleSignUp} />} />
+          <Route path="cart" element= { <Cart />} />
           <Route path= "*" element= {<NotFound />} />
         </Routes>
-      
-      
-      
     </>
   )
 }
