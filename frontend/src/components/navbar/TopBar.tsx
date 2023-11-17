@@ -1,13 +1,15 @@
 import {Container,Nav,Navbar} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css'
+import './Topbar.css'
 import logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {useSelector} from 'react-redux'
+import { RootState } from '../../redux/store';
 
 
 const TopBar = () => {
-  
+  const cartProd = useSelector((state: RootState) => state.cart);
   return (
     <>
       <Navbar className='clr' bg="myred" data-bs-theme="dark"  >
@@ -24,7 +26,7 @@ const TopBar = () => {
             <Nav.Link as={Link} to=""><p>|</p> </Nav.Link>
             <Nav.Link className='space-ed' as={Link} to="/signup"> Sign Up</Nav.Link>
             
-            <Nav.Link  as={Link} to="/cart" > < ShoppingCartIcon /> </Nav.Link>
+            <Nav.Link  as={Link} to="/cart" > < ShoppingCartIcon /> {cartProd.items.length } </Nav.Link>
             <div></div>
 
           </Nav>
