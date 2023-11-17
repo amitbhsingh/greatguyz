@@ -1,16 +1,26 @@
 import './Cart.css'
 import { useSelector } from 'react-redux';
+import {useDispatch} from 'react-redux'
 import { RootState } from '../../redux/store'; // Adjust the path to where your RootState is defined
-
+import {RemoveItem} from '../../features/auth/cartSlice'
 const Cart = () => {
   // Use the useSelector hook to access the cart items from the Redux store
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
+  const dispatch=useDispatch();
+  const removeItemFromCart=(id:number)=>{
+    dispatch(RemoveItem(id))
+  }
+
+
+  
+
   return (
     <div className="cart-container">
-      <h2>Your Cart</h2>
+      <h1 className='h1-cart' >Your Cart</h1>
+      
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <h1 className='h2-cart' >is empty :(</h1>
       ) : (
         <ul>
           {cartItems.map(item => (
@@ -21,6 +31,7 @@ const Cart = () => {
                 <p>Quantity: {item.quantity}</p>
                 <p>Price: ₹{item.price}</p>
                 <p>Subtotal: ₹{item.price * item.quantity}</p>
+                <button className='cart1' onClick={() => removeItemFromCart(item.id)}>Remove</button>
               </div>
             </li>
           ))}
