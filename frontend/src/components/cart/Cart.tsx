@@ -3,17 +3,18 @@ import { useSelector } from 'react-redux';
 import {useDispatch} from 'react-redux'
 import { RootState } from '../../redux/store'; // Adjust the path to where your RootState is defined
 import {RemoveItem} from '../../features/auth/cartSlice'
+
+
 const Cart = () => {
   // Use the useSelector hook to access the cart items from the Redux store
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
+  
+  const taxRate=.28;
+  
   const dispatch=useDispatch();
   const removeItemFromCart=(id:number)=>{
-    dispatch(RemoveItem(id))
+    dispatch(RemoveItem(id));
   }
-
-
-  
 
   return (
     <div className="cart-container">
@@ -30,7 +31,9 @@ const Cart = () => {
                 <h3>{item.name}</h3>
                 <p>Quantity: {item.quantity}</p>
                 <p>Price: ₹{item.price}</p>
+              
                 <p>Subtotal: ₹{item.price * item.quantity}</p>
+                <p>Tax: ₹{item.price*taxRate}</p>
                 <button className='cart1' onClick={() => removeItemFromCart(item.id)}>Remove</button>
               </div>
             </li>
