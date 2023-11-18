@@ -10,11 +10,23 @@ const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   
   const taxRate=.28;
-  
+
   const dispatch=useDispatch();
   const removeItemFromCart=(id:number)=>{
     dispatch(RemoveItem(id));
   }
+  const totalTax = cartItems.reduce((acc, item) => {
+    return acc + (item.price * item.quantity) * taxRate;
+  }, 0);
+  
+  // Calculate the total price for all items including tax
+  const totalPriceWithTax = cartItems.reduce((acc, item) => {
+    return acc + (item.price * item.quantity);
+  }, 0) + totalTax;
+
+
+
+
 
   return (
     <div className="cart-container">
@@ -33,7 +45,8 @@ const Cart = () => {
                 <p>Price: ₹{item.price}</p>
               
                 <p>Subtotal: ₹{item.price * item.quantity}</p>
-                <p>Tax: ₹{item.price*taxRate}</p>
+                <p>Tax: ₹{parseFloat(totalTax.toFixed(2))}</p>
+                <p>Total: ₹{totalPriceWithTax}</p>
                 <button className='cart1' onClick={() => removeItemFromCart(item.id)}>Remove</button>
               </div>
             </li>
