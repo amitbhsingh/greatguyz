@@ -1,13 +1,16 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
-const LocalUserData= new mongoose.Schema({
+const LocalUserData = new mongoose.Schema({
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   password: {
-    type: String,
-    required: true
+    type: String, 
+    required: true,
+    unique: false,
+    select:false, //hides the password field when we retrieve data from database
   },
   created: {
     type: Date,
@@ -15,6 +18,6 @@ const LocalUserData= new mongoose.Schema({
   },
 })
 
-const LocalUser = mongoose.model('register', LocalUserData);
+const LocalUser = mongoose.model('LocUser', LocalUserData);
 
 export default LocalUser;

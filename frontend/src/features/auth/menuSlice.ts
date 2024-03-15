@@ -20,8 +20,8 @@ interface MenuState {
 export const fetchMenuItems = createAsyncThunk(
   'menu/fetchMenuItems',
   async () => {
-    const response = await fetch('http://localhost:3000/api/products');
-    return response.json();
+    const itemsFromMenu = await fetch('http://localhost:3000/api/products');
+    return itemsFromMenu.json();
   }
 );
 

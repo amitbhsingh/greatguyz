@@ -1,6 +1,6 @@
 import { Request,Response } from "express"
 import connectDatabase from "../../../config/database";
-import products from "../../products/product";
+import LocalUser from '../../../models/userdb'
 export default async function handler(req:Request,res:Response){
   
   const {method}=req;
@@ -9,8 +9,8 @@ export default async function handler(req:Request,res:Response){
   }
   if(method==="POST"){
     try{
-      const product= await products.create(req.body);
-      res.status(201).json(product)
+      const locUser= await LocalUser.create(req.body);
+      res.status(201).json(locUser)
       req.body
 
     }catch(err){

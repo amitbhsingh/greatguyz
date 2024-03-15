@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
+  
   googleId: {
     type: String,
     required: true,
@@ -16,12 +17,12 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   lastName: {
-    type: String,
-    required: false
+    type: String
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   },
   photo: {
     type: String,
@@ -32,7 +33,8 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+userSchema.index({ googleId: 1 });
 
-const User = mongoose.model('Google_Customer', userSchema);
+const GoogleUser = mongoose.model('Google_Customer', userSchema);
 
-export default User;
+export default GoogleUser;

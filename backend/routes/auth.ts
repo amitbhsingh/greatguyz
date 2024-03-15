@@ -1,4 +1,3 @@
-// import GoogleStrategy from 'passport-google-oidc'
 import passport from 'passport';
 import express from 'express'
 // import db from '../config/database'
@@ -16,9 +15,10 @@ router.get('/auth/google/callback',
   function(req, res) {
     console.log("I RAN AUTH/GOOGLE/CALLBACK")
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/cart');
   });
 
+  module.exports = router;
 // router.get('/auth/google/callback',
 //   (req,res,next)=>{
 //     console.log("I RANNNNNNNNNNNNNNNNNNNN")
@@ -42,4 +42,3 @@ router.get('/auth/google/callback',
 //     })(req,res,next);
 //   }); 
 
-module.exports = router;

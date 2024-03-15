@@ -1,0 +1,31 @@
+/* src/SignUp.css */
+/* src/SignUp.css */
+.userLoginPage{
+  color:#374259;
+  text-align: center;
+  margin-top: 100px;
+
+}
+
+.member-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  top: 20px;
+}
+.userwelcome{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+}
+.textandemail{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}

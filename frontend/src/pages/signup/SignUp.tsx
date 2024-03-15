@@ -7,11 +7,12 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {logIn} from '../../features/auth/authSlice'
-
+// import {googleLogIn} from '../../features/auth/authSlice'
 const SignUp: React.FC = () => {
-  const [email, setEmail] = useState<any>("");
-  const [password, setPassword] = useState<any>("");
-  const [confirmPassword, setConfirmPassword] = useState<any>("");
+  // const [name, setName] = useState<any>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const navigate = useNavigate();
   const dispatch=useDispatch();
 
@@ -23,13 +24,14 @@ const SignUp: React.FC = () => {
       console.error("Passwords do not match.");
       return;
     }
+    // console.log({ email, password })
 
-    axios.post('http://localhost:3000/signup', {
+    axios.post('http://localhost:3000/locusers', {
         email,
         password
     })
     .then(response => {
-        console.log(response);
+        
         dispatch(logIn(response.data.user));
         navigate('/menu');
     })
@@ -42,6 +44,10 @@ const SignUp: React.FC = () => {
     <div>
       <h2 className='signuptext'>Sign Up</h2>
       <form className='signup-form' onSubmit={handleSubmit}>
+      {/* <div className='input-group'>
+          <label className='emailSignup'>First Name</label>
+          <input type="text" className='emailinSignup' placeholder='Enter Name' value={name} onChange={(e) => setName(e.target.value)} />
+        </div> */}
         <div className='input-group'>
           <label className='emailSignup'>Email</label>
           <input type="email" className='emailinSignup' placeholder='Enter Email' value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -54,9 +60,9 @@ const SignUp: React.FC = () => {
           <label className='confirmPasswordSignup'>Confirm Password</label>
           <input type='password' className='confirmPasswordinSignup' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} autoComplete="new-password" />
         </div>
-        <button type="submit" className='signup-button'>Signup <PersonAddIcon /></button>
-        <a className="btn-googleSignup" href="http://localhost:3000/auth/google/signup"><GoogleIcon /> Signup with Google</a>
-        {/* <a className="btn-facebookSignup" href="http://localhost:3000/auth/facebook/signup"> <FacebookIcon /> Signup with Facebook</a> */}
+        <button type="submit" className='signup-button'>Sign Up <PersonAddIcon /></button>
+        <a className="btn-googleSignup" href="http://localhost:3000/auth/google"><GoogleIcon /> Signup with Google</a>
+      
       </form>
     </div>
   );

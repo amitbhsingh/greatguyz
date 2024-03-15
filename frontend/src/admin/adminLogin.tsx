@@ -1,80 +1,62 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addMenuItem, updateMenu } from '../features/auth/menuSlice';
 
 const AdminLogin = () => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [image, setImage] = useState(''); // Assuming you will use data URL for images
-  const [authenticated, setAuthenticated] = useState(false);
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
-  const handleLogin = () => {
-    // Logic to handle admin login
-    // If successful:
-    setAuthenticated(true);
-  };
+  const handleLogin = async (e:any) => {
+    e.preventDefault();
+    setLoginError('');
 
-  const handleImageChange = (e) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(file.result.toString());
-      };
-      reader.readAsDataURL(file);
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      console.log('Login successful:', data);
+      alert('Login successful!'); // Implement your logic here for a successful login
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('Failed to log in. Please check your credentials and try again.');
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    // Define logic to generate the next ID here
-    const nextId = 5; // Placeholder for next ID logic
-    
-    const menuItem = {
-      id: nextId,
-      name,
-      price: parseFloat(price),
-      image // This should be the data URL or a path to the image
-    };
-  
-    // Dispatch the `addMenuItem` action if it's a new item
-    // or `updateMenu` if you're updating an existing item
-    dispatch(addMenuItem(menuItem));
-    // dispatch(updateMenu(menuItem));
-
-  };
-
-  if (!authenticated) {
-    return (
-      <div>
-        {/* Login form would go here */}
-        <button onClick={handleLogin}>Login as Admin</button>
-      </div>
-    );
-  }
-
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Item name"
-        />
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          placeholder="Price"
-        />
-        <input
-          type="file"
-          onChange={handleImageChange}
-        />
-        <button type="submit">Add/Update Menu Item</button>
+      <h2>Admin Login</h2>
+      {loginError && <p className="error">{loginError}</p>}
+      <form onSubmit={handleLogin}>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
