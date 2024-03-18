@@ -22,7 +22,9 @@ import { useEffect,useState } from "react"
 export function App() {
   const [users,setUsers]=useState([])
   useEffect(()=>{
-    axios.get('http://localhost:3000/getUsers')
+    axios.get('http://localhost:3000/gusers', {
+      withCredentials:true
+    })
     .then(users=>setUsers(users.data))
   },[])
   
@@ -81,7 +83,6 @@ export function WrappedApp(){
   
   );
 }
-
 
 
 

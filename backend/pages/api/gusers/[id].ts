@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import connectDatabase from '../../../config/database';
 import GoogleUser from '../../../models/user';
-import { isValidObjectId } from 'mongoose';
+
 
 // Connect to your database
-connectDatabase();
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await connectDatabase();
   const {
     query: { googleId },
     method,
@@ -14,9 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   switch (method) {
     case 'GET':
-       if (!isValidObjectId(googleId)) {
-         return res.status(400).json({ message: 'Invalid user ID' });
-       }
+      if (typeof googleId !== 'string') {
+        return res.status(400).json({ message: 'googleId must be a string' });
+      }
+
       try {
         const user = await GoogleUser.findOne({ googleId: googleId });
         if (!user) {
@@ -24,7 +26,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
         return res.status(200).json(user);
       } catch (err: any) {
-        // Handle errors appropriately
         return res.status(500).json({ message: 'Error retrieving user information', err: err.message });
       }
       case "POST":

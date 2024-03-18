@@ -1,9 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-// import classic from '../../assets/classic.png';
-// import veggie from '../../assets/veggie.png';
-// import spicy from '../../assets/spicy.png';
-// import tandoori from '../../assets/tandoori.png';
-// import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../../redux/store'
 
 interface MenuItem {
@@ -81,3 +76,10 @@ export default menuSlice.reducer;
 //     { id: 2, name: "Veggie King", image: veggie, price: 50 },
 //     { id: 3, name: "Spicy Lover", image: spicy, price: 45 },
 //     { id: 4, name: "Tandoori Burger", image: tandoori, price: 45 },
+
+
+// import classic from '../../assets/classic.png';
+// import veggie from '../../assets/veggie.png';
+// import spicy from '../../assets/spicy.png';
+// import tandoori from '../../assets/tandoori.png';
+// import { createSelector } from '@reduxjs/toolkit';

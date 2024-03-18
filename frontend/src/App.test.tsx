@@ -6,10 +6,6 @@ import { MemoryRouter } from 'react-router-dom';
 
 
 
-
-
-
-
 describe('App',()=>{
   it('Renders hello world', ()=>{
     render(<WrappedApp />)

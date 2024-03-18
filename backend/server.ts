@@ -37,11 +37,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS setup for frontend running on a different port
 app.use(cors({
-  origin: 'http://localhost:5173/',
+  origin: 'http://localhost:5173',
   credentials: true, // Set to true if your frontend should pass cookies to the backend.
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
-
+// app.options('*', cors());
 
 // Session setup
 app.use(session({
@@ -50,6 +50,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
+
 
 // Passport initialization
 app.use(passport.initialize());
@@ -97,7 +98,7 @@ app.post('/login', cors(), async (req, res) => {
 // Google authentication routes
 app.get('/auth/google', (req, res, next) => {
   // The referer header contains the URL of the page that led the user here
-  const originUrl = req.get('Referer') || 'http://localhost:5173/signup';
+  const originUrl = req.get('Referer') || 'http://localhost:5173/';
   req.session.originUrl = originUrl;
   passport.authenticate('google', { scope: ['profile', 'email'] })(req, res, next);
 });
@@ -116,8 +117,8 @@ app.get('/auth/google/callback',
         const newUser = new GoogleUser({
           googleId: user.googleId,
           name: user.displayName,
-          email: user.emails[0].value,
-          image: user.photos[0].value,
+          email: user.emails[0].valueOf,
+          image: user.photos[0].valueOf,
         });
 
         await newUser.save();
@@ -175,20 +176,20 @@ app.get('api/checkout', async (req:Request, res: Response)=>{
 // Google login
 
 interface GoogleUser {
-  emails: any;
-  photos: any;
-  displayName: any;
-  _id?: string; // If you're storing the MongoDB ObjectId in the session
-  googleId?: string; // If you're storing the Google ID in the session
-  // ... other properties
+  emails: string;
+  photos: string;
+  displayName: string;
+  _id?: string; 
+  googleId?: string; 
+ 
 }
 
-// Extending the Express Request type to include the custom user type
+
 interface RequestWithGoogleUser extends Request {
   user?: GoogleUser;
 }
 
-app.get('/api/gusers/:googleId', async (req: Request, res: Response) => {
+app.get('/api/gusers/gusers', async (req: Request, res: Response) => {
     const { googleId } = req.params;
     if (!isValidObjectId(googleId)) {
       return res.status(400).json({ message: 'Invalid user ID' });
@@ -253,5 +254,6 @@ app.use(router);
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  console.table("hello world")
   connectDatabase(); // Connect to the database
 });

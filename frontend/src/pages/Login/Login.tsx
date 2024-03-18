@@ -22,6 +22,8 @@ const Login: React.FC = () => {
       axios.post('http://localhost:3000/login', {
         email,
         password,
+    }, {
+      withCredentials:true
     })
     .then(response => {
         console.log(response);
