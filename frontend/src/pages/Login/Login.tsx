@@ -19,7 +19,7 @@ const Login: React.FC = () => {
       e.preventDefault();
 
       // Send a POST request to your backend for login
-      axios.post('http://localhost:3000/login', {
+    axios.post('http://localhost:3000/login', {
         email,
         password,
     }, {
@@ -27,6 +27,8 @@ const Login: React.FC = () => {
     })
     .then(response => {
         console.log(response);
+        const userId=response.data.user_id
+        localStorage.setItem('userId',userId)
         dispatch(logIn(response.data.user));
         navigate('/member');
     })

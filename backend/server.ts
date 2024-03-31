@@ -5,10 +5,10 @@ import express, { Request, Response } from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import connectDatabase from './config/database';
-// import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { isValidObjectId } from 'mongoose';
-import Razorpay from 'razorpay';
-import Admin from './models/admin';
+// import Razorpay from 'razorpay';
+// import Admin from './models/admin';
 import Checkout from './models/ccheckout';
 import Order from './models/orders';
 import Products from './models/products';
@@ -41,7 +41,7 @@ app.use(cors({
   credentials: true, // Set to true if your frontend should pass cookies to the backend.
   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
-// app.options('*', cors());
+app.options('*', cors());
 
 // Session setup
 app.use(session({
@@ -111,7 +111,7 @@ app.get('/auth/google/callback',
     const user = req.user as GoogleUser;
     try {
       // Find the user in the database
-      const dbUser = await GoogleUser.findOne({ googleId: user.googleId });
+      const dbUser = await GoogleUser.findOne({ userId: user.userId });
       if (!dbUser) {
         // If the user doesn't exist in the database, create a new user
         const newUser = new GoogleUser({
@@ -176,6 +176,7 @@ app.get('api/checkout', async (req:Request, res: Response)=>{
 // Google login
 
 interface GoogleUser {
+  userId: any;
   emails: string;
   photos: string;
   displayName: string;
@@ -189,7 +190,7 @@ interface RequestWithGoogleUser extends Request {
   user?: GoogleUser;
 }
 
-app.get('/api/gusers/gusers', async (req: Request, res: Response) => {
+app.get('/api/gusers/:googleId', async (req: Request, res: Response) => {
     const { googleId } = req.params;
     if (!isValidObjectId(googleId)) {
       return res.status(400).json({ message: 'Invalid user ID' });

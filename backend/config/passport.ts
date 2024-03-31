@@ -4,6 +4,7 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import express from 'express'
 const router= express.Router();
 import dotenv, { config } from 'dotenv'
+// import  jwt from "jsonwebtoken"
 dotenv.config();
 
 const app=express();
@@ -17,11 +18,11 @@ passport.use(new GoogleStrategy({
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
   callbackURL: 'http://localhost:3000/auth/google/callback'
   
-}, async (accessToken, refreshToken, profile, done) => {
+}, async (accessToken, _refreshToken, profile, done) => {
   console.log("Inside Passport Callback");
   try {
     // Check if user already exists in our database
-    let user = await GoogleUser.findOne({ googleId: profile.id }).exec();
+    let user = await GoogleUser.findOne({ email: profile.emails }).exec();
 
     if (!user) {
       // If not, create a new user in the database
@@ -31,11 +32,13 @@ passport.use(new GoogleStrategy({
         firstName: profile.name?.givenName,
         lastName: profile.name?.familyName,
         email: profile.emails?.[0]?.value,
-        photo: profile.photos?.[0]?.value
+        photo: profile.photos?.[0]?.value,
+        accessToken
       });
       await user.save();
       try {
         await user.save();
+        // const token= await jwt.sign{}
         console.log("User saved:", user);
      } catch (error) {
         console.error("Error saving user:", error);

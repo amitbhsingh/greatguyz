@@ -9,18 +9,18 @@ import GoogleUser from '../../../models/user';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connectDatabase();
   const {
-    query: { googleId },
+    query: { id },
     method,
   } = req;
 
   switch (method) {
     case 'GET':
-      if (typeof googleId !== 'string') {
-        return res.status(400).json({ message: 'googleId must be a string' });
+      if (typeof id !== 'string') {
+        return res.status(400).json({ message: 'id must be a string' });
       }
 
       try {
-        const user = await GoogleUser.findOne({ googleId: googleId });
+        const user = await GoogleUser.findOne({ id: id });
         if (!user) {
           return res.status(404).json({ message: 'User not found' });
         }

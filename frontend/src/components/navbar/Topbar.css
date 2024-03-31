@@ -1,6 +1,9 @@
 .bg-myred{
   background-color: #374259;
   color:#F2D8D8;
+  font-size: larger;
+  -webkit-box-shadow: 0px 2px 13px 0px #7bde11; 
+  box-shadow: 0px 2px 13px 0px #000000;
   
 }
 

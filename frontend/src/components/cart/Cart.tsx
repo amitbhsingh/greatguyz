@@ -1,3 +1,4 @@
+"use client"
 import './Cart.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { RemoveItem, IncreasePayload, DecreasePayload, calculateCart } from '../../features/auth/cartSlice'

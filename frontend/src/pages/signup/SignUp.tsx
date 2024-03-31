@@ -24,7 +24,7 @@ const SignUp: React.FC = () => {
       console.error("Passwords do not match.");
       return;
     }
-    // console.log({ email, password })
+    
 
     axios.post('http://localhost:3000/locusers', {
         email,

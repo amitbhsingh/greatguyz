@@ -22,7 +22,7 @@ import { useEffect,useState } from "react"
 export function App() {
   const [users,setUsers]=useState([])
   useEffect(()=>{
-    axios.get('http://localhost:3000/gusers', {
+    axios.get('http://localhost:3000/api/gusers', {
       withCredentials:true
     })
     .then(users=>setUsers(users.data))
@@ -40,9 +40,9 @@ export function App() {
     })
     .then(response => {
       // Handle the response from the server if the signup was successful
-      console.log('User signed up successfully:', response.data);
-      // Possibly save the received token to local storage or state
-      // Navigate to a different page if needed, etc.
+      const userId= response.data.id;
+      console.log(userId)
+    
     })
     .catch(error => {
       // Handle any errors that occurred during the signup process
