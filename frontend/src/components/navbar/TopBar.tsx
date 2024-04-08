@@ -7,6 +7,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {useDispatch,useSelector} from 'react-redux'
 import { RootState } from '../../redux/store';
 import {clearUser} from '../../features/auth/authSlice'
+import { motion } from "framer-motion"
+
 
 const TopBar = () => {
   // const totalQuantity = cartProd.items.reduce((total, item) => total + item.quantity, 0);
@@ -24,7 +26,13 @@ const TopBar = () => {
       <Navbar className='clr' bg="myred" data-bs-theme="dark"  >
         <Container>
           <Navbar.Brand as ={Link} to="/">
-          <img src={logo} 
+          <motion.img whileHover={{scale: [1.4, 1.2, 1.2, 1, 1.1],
+                      rotate: [0, 0, 360, 360, 0],
+                      x:[5,100,-20,1],
+                      borderRadius: ["20%", "20%", "50%", "50%", "20%"]}}
+                      transition={{duration:4}}
+          
+          src={logo}  
           style={{width:90, marginTop:1, marginBottom:1, marginRight:10, marginLeft:-10}} />
            </Navbar.Brand>
           <Nav className="ms-auto" style={{color:"#F2D8D8"}} >
